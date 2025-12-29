@@ -1,68 +1,186 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* General Reset */
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body background */
+body {
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 10px;
+  transition: background 0.3s ease;
 }
 
+/* Container with glass + shadow */
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  padding: 30px 25px;
+  transition: all 0.3s ease;
+}
+
+/* Dark mode container */
+.container.dark {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Header */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #006064;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  transition: color 0.3s ease;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.container.dark h1 {
+  color: #00bcd4;
+}
+
+/* Dark Mode toggle button */
+button.dark-toggle {
+  display: block;
+  margin: 0 auto 15px auto;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  color: white;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+button.dark-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #00acc1;
+  resize: vertical;
+  margin-bottom: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+}
+
+textarea:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 12px rgba(0,188,212,0.5);
+  outline: none;
+}
+
+/* Buttons */
+button {
+  padding: 12px 25px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  transition: all 0.3s ease, box-shadow 0.4s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,188,212,0.5);
+  background: linear-gradient(135deg, #0097a7, #00bcd4);
+}
+
+/* Error / success messages */
+.error {
+  color: #d50000;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
+  animation: shake 0.3s;
+}
+
+.success {
+  color: #00bcd4;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
+  animation: glow 1.2s infinite alternate;
+}
+
+/* Keyframes for glow & shake */
+@keyframes glow {
+  from { text-shadow: 0 0 5px #00bcd4; }
+  to { text-shadow: 0 0 20px #00bcd4; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Formatted JSON output */
+.output-section {
+  margin-top: 20px;
+  background-color: #002f3c;
+  color: #e0f7fa;
+  padding: 20px;
+  border-radius: 15px;
+  overflow-x: auto;
+  box-shadow: inset 0 0 15px rgba(0,188,212,0.3);
+  transition: all 0.3s ease;
+}
+
+.container.dark .output-section {
+  background-color: #001f27;
+}
+
+/* Preformatted JSON */
+pre {
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Button group under JSON output */
+.button-group {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 15px;
   }
-  a:hover {
-    color: #747bff;
-  }
+
   button {
-    background-color: #f9f9f9;
+    width: 100%;
+  }
+
+  .button-group button {
+    width: 100%;
   }
 }
