@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 
-const API_URL = "http://localhost:5000/api/format-json";
+const API_URL = "https://json-formatter-backend.onrender.com/api/format-json";
 
 function App() {
   const [json, setJson] = useState("");
